@@ -62,10 +62,22 @@ function evaluatePixel(sample) {
 }
 """
 
+data_10m = {
+    "eval": evalscript_10m,
+    "size": (2500, 2500),
+    "name": "10m"
+}
 
-def save(bbox: BBox, scene_date, base_name):
+data_20m = {
+    "eval": evalscript_20m,
+    "size": (1250, 1250),
+    "name": "20m"
+}
+
+
+def save(bbox: BBox, scene_date, base_name, data):
     request_bands = SentinelHubRequest(
-        evalscript=evalscript_10m,
+        evalscript=data["eval"],
         input_data=[
             SentinelHubRequest.input_data(
                 data_collection=data_collection,
@@ -74,15 +86,15 @@ def save(bbox: BBox, scene_date, base_name):
         ],
         responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
         bbox=bbox,
-        size=(2500, 2500),
+        size=data["size"],
         config=config,
-        data_folder=f"cache/raw/rgb"
+        data_folder=f"cache/raw/"
     )
     request_bands.get_data(save_data=True)
 
     saved_files = request_bands.get_filename_list()
     if saved_files:
-        fix_output.fix_path(request_bands.data_folder, saved_files, base_name)
+        fix_output.fix_path(request_bands.data_folder, saved_files, base_name, suffix=data["name"])
 
 
 def download(time_interval: (date, date), bbox: BBox):
@@ -103,41 +115,20 @@ def download(time_interval: (date, date), bbox: BBox):
         key=lambda item: item["properties"].get("eo:cloud_cover", 100)
     )
 
-    # for item in results:
-    #     print(
-    #         item
-    #     )
-
     print(best_item)
     print(f"Items: {len(results)}")
 
     scene_date = best_item["properties"]["datetime"][:16]
     cloud = best_item["properties"].get("eo:cloud_cover")
 
+    data = data_10m
+
     # print(f"{year}-{month:02d}: {scene_date} (clouds: {cloud}%)")
     base_name = f"{scene_date.replace("T", "_").replace(":", "_")}"
     print(f"Best item: {base_name} {cloud}%")
-    save(bbox, scene_date[:10], base_name)
+    save(bbox, scene_date[:10], base_name, data)
 
-    # # --- RGB download ---
-    # request_rgb = SentinelHubRequest(
-    #     evalscript=evalscript_10m,
-    #     input_data=[
-    #         SentinelHubRequest.input_data(
-    #             data_collection=data_collection,
-    #             time_interval=(scene_date, scene_date)
-    #         )
-    #     ],
-    #     responses=[SentinelHubRequest.output_response("default", MimeType.PNG)],
-    #     bbox=bbox,
-    #     size=(1000, 1000),
-    #     config=config,
-    #     data_folder=f"cache/raw/rgb"
-    # )
-    # request_rgb.get_data(save_data=True)
 
-    # saved_files = request_rgb.get_filename_list()
-    # if saved_files:
-    #     fix_output.fix_path(request_rgb.data_folder, saved_files, base_name)
-
+    data = data_20m
+    save(bbox, scene_date[:10], base_name, data)
     print("Ready")

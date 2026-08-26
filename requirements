@@ -2,3 +2,4 @@ sentinelhub
 python-dotenv
 shutil
 rasterio
+matplotlib
