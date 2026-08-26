@@ -24,5 +24,5 @@ def fix_path(path, files, base_name):
 
     print(f"Moved from {path} to {final_path}")
 
-fix_path("cache/raw/rgb/496ceeef5210f23ffff65483049f026c", ["request.json", "response.png"], "test_date")
-fix_path("cache/raw/bands/59c370ae2ae320f2d3ff07ce77477c6a", ["request.json", "response.tiff"], "test_date")
+fix_path("cache/raw/rgb/496ceeef5210f23ffff65483049f026c", ["request.json", "response.png"], "2025-07-20")
+fix_path("cache/raw/bands/59c370ae2ae320f2d3ff07ce77477c6a", ["request.json", "response.tiff"], "2025-07-20")
