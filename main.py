@@ -87,8 +87,8 @@ end_year = today.year
 
 os.makedirs("output", exist_ok=True)
 
-for year in range(end_year - 2, end_year + 1):
-    for month in range(7, 8):
+for year in range(end_year - 10, end_year + 1):
+    for month in range(5, 9):
         month_start = date(year, month, 1)
         if month_start > today:
             continue  # skip future months
