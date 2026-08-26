@@ -18,6 +18,7 @@ def fix_path(path, files, base_name):
         print(dst)
         os.replace(src,dst)
 
+    os.makedirs(final_path, exist_ok=True)
     shutil.copy(path, final_path)
 
     print(f"Moved from {path} to {final_path}")
