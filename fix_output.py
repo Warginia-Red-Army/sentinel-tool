@@ -15,7 +15,7 @@ def fix_path(path, files, base_name):
         old_name = Path(file)
         src = os.path.join(path, file)
         new_name = old_name.with_stem(old_name.stem + f"_{type}")
-        dst = f"{path}/{new_name}"
+        dst = f"{final_path}/{new_name}"
         # print(dst)
         # os.replace(src,dst)
         shutil.copy(src, dst)
@@ -25,3 +25,4 @@ def fix_path(path, files, base_name):
     print(f"Moved from {path} to {final_path}")
 
 fix_path("cache/raw/rgb/496ceeef5210f23ffff65483049f026c", ["request.json", "response.png"], "test_date")
+fix_path("cache/raw/bands/59c370ae2ae320f2d3ff07ce77477c6a", ["request.json", "response.tiff"], "test_date")
