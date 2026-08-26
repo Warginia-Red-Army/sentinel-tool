@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 import os
 from datetime import date
 import calendar
-import shutil
 
 load_dotenv(verbose=True)
 
@@ -83,7 +82,7 @@ end_year = today.year
 
 os.makedirs("output", exist_ok=True)
 
-for year in range(end_year - 10, end_year + 1):
+for year in range(end_year - 2, end_year + 1):
     for month in range(7, 8):
         month_start = date(year, month, 1)
         if month_start > today:
@@ -136,13 +135,13 @@ for year in range(end_year - 10, end_year + 1):
         )
         request_rgb.get_data(save_data=True)
 
-        saved_files = request_rgb.get_filename_list()
-        if saved_files:
-            src = os.path.join(request_rgb.data_folder, saved_files[0])
-            dst = f"output/rgb/{base_name}_rgb.tiff"
-            os.makedirs(os.path.dirname(dst), exist_ok=True)
-            os.replace(src, dst)
-            print(f"Zapisano: {dst}")
+        # saved_files = request_rgb.get_filename_list()
+        # if saved_files:
+        #     src = os.path.join(request_rgb.data_folder, saved_files[0])
+        #     dst = f"output/rgb/{base_name}_rgb.tiff"
+        #     os.makedirs(os.path.dirname(dst), exist_ok=True)
+        #     os.replace(src, dst)
+        #     print(f"Zapisano: {dst}")
 
         # --- Raw bands download (B04, B08 -- useful for NDVI etc) ---
         request_bands = SentinelHubRequest(
@@ -161,12 +160,12 @@ for year in range(end_year - 10, end_year + 1):
         )
         request_bands.get_data(save_data=True)
 
-        saved_files = request_bands.get_filename_list()
-        if saved_files:
-            src = os.path.join(request_bands.data_folder, saved_files[0])
-            dst = f"data/raw/bands/{base_name}_bands.tiff"
-            os.makedirs(os.path.dirname(dst), exist_ok=True)
-            os.replace(src, dst)
-            print(f"Zapisano: {dst}")
+        # saved_files = request_bands.get_filename_list()
+        # if saved_files:
+        #     src = os.path.join(request_bands.data_folder, saved_files[0])
+        #     dst = f"data/raw/bands/{base_name}_bands.tiff"
+        #     os.makedirs(os.path.dirname(dst), exist_ok=True)
+        #     os.replace(src, dst)
+        #     print(f"Zapisano: {dst}")
 
 print("Gotowe.")
