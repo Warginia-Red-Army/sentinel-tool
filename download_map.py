@@ -74,7 +74,7 @@ def save(bbox: BBox, scene_date, base_name):
         ],
         responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
         bbox=bbox,
-        size=(1000, 1000),
+        size=(2500, 2500),
         config=config,
         data_folder=f"cache/raw/rgb"
     )

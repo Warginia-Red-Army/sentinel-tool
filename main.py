@@ -100,7 +100,7 @@ for year in range(end_year - 2, end_year + 1):
 
         time_interval = (month_start.isoformat(), month_end.isoformat())
 
-        bbox = BBox(bbox_helper.convertToCorrectBbox(bbox_helper.bydgoszcz), crs=CRS.WGS84)
+        bbox = BBox(bbox_helper.convertToCorrectBbox(bbox_helper.osielsko), crs=CRS.WGS84)
         download_map.download(time_interval, bbox)
         # search = catalog.search(
         #     data_collection,
