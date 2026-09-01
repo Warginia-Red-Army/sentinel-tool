@@ -12,11 +12,6 @@ def fix_path(path, files, base_name, with_json: bool = True, suffix: str = ""):
     os.makedirs(final_path, exist_ok=True)
     if with_json:
         files.append(str(Path(files[0]).parent / "request.json"))
-
-    # print(f"Moving from {src_folder} to {final_path}")
-    # print(f"Files: {files}")
-    # print(f"Base: {base_name}")
-    # fix files name
     for file in files:
         file = Path(file)
         src = Path(path) / file
