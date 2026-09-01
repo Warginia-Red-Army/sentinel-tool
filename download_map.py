@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from sentinelhub import (
     SHConfig,
     SentinelHubRequest,
@@ -36,31 +38,34 @@ data_collection = DataCollection.SENTINEL2_L2A.define_from(
 
 catalog = SentinelHubCatalog(config=config)
 
-evalscript_10m = """
-//VERSION=3
-function setup() {
-    return {
-        input: ["B02", "B03", "B04", "B08"],
-        output: { bands: 4, sampleType: "FLOAT32" }
-    };
-}
-function evaluatePixel(sample) {
-    return [sample.B02, sample.B03, sample.B04, sample.B08];
-}
-"""
+evalscript_10m = Path("scripts\\evaluates\\evalscript_10m.js")
+evalscript_20m = Path("scripts\\evaluates\\evalscript_20m.js")
 
-evalscript_20m = """
-//VERSION=3
-function setup() {
-    return {
-        input: ["B05", "B06", "B07", "B8A", "B11", "B12"],
-        output: { bands: 6, sampleType: "FLOAT32" }
-    };
-}
-function evaluatePixel(sample) {
-    return [sample.B05, sample.B06, sample.B07, sample.B8A, sample.B11, sample.B12];
-}
-"""
+# evalscript_10m = """
+# //VERSION=3
+# function setup() {
+#     return {
+#         input: ["B02", "B03", "B04", "B08"],
+#         output: { bands: 4, sampleType: "FLOAT32" }
+#     };
+# }
+# function evaluatePixel(sample) {
+#     return [sample.B02, sample.B03, sample.B04, sample.B08];
+# }
+# """
+#
+# evalscript_20m = """
+# //VERSION=3
+# function setup() {
+#     return {
+#         input: ["B05", "B06", "B07", "B8A", "B11", "B12"],
+#         output: { bands: 6, sampleType: "FLOAT32" }
+#     };
+# }
+# function evaluatePixel(sample) {
+#     return [sample.B05, sample.B06, sample.B07, sample.B8A, sample.B11, sample.B12];
+# }
+# """
 
 data_10m = {
     "eval": evalscript_10m,

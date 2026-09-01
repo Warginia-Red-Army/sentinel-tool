@@ -22,7 +22,8 @@ def convertToCorrectBbox(bbox: tuple[float, float, float, float]) -> tuple[float
     return min_lon,  min_lat, max_lon, max_lat
 
 # output test
-print(convertToCorrectBbox(osielsko))
-print(convertToCorrectBbox(bydgoszcz))
-print(convertToCorrectBbox(swiecie))
-print(convertToCorrectBbox(fordon))
+if __name__ == "main":
+    print(convertToCorrectBbox(osielsko))
+    print(convertToCorrectBbox(bydgoszcz))
+    print(convertToCorrectBbox(swiecie))
+    print(convertToCorrectBbox(fordon))
