@@ -1,4 +1,5 @@
 import calendar
+import os
 from datetime import date
 
 from sentinelhub import (
