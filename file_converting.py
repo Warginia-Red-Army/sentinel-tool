@@ -23,17 +23,17 @@ save_settings = {
     },
 }
 
-def convert_image(folder, outs):
-    converters = {
-        "N": ("ndvi", convert_ndvi),
-        "T": ("true", convert_true_color),
-        "F": ("false", convert_false_color),
-        "M": ("ndmi", convert_ndmi),
-        "B": ("nbr", convert_nbr),
-        "S": ("swir", convert_swir_agriculture),
-        "U": ("urban", convert_urban_geology),
-    }
+converters = {
+    "N": ("ndvi", convert_ndvi),
+    "T": ("true", convert_true_color),
+    "F": ("false", convert_false_color),
+    "M": ("ndmi", convert_ndmi),
+    "B": ("nbr", convert_nbr),
+    "S": ("swir", convert_swir_agriculture),
+    "U": ("urban", convert_urban_geology),
+}
 
+def convert_image(folder, outs):
     results = []
     for key, (name, converter) in converters.items():
         if key in outs:
