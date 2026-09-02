@@ -2,10 +2,6 @@ import os
 import shutil
 from pathlib import Path
 
-
-# path =cache/raw | rgb/fgawefawjiowfe
-# files = list of files in folder
-# base name = date + scene (final name)
 def fix_path(path, files, base_name, with_json: bool = True, suffix: str = ""):
     src_folder = Path(path) / Path(files[0]).parent
     final_path = Path("data/raw") / base_name
@@ -22,7 +18,3 @@ def fix_path(path, files, base_name, with_json: bool = True, suffix: str = ""):
         shutil.copy(src, dst)
 
     print(f"Moved from {src_folder} to {final_path}")
-
-if __name__ == "__main__":
-    fix_path("cache/raw/rgb/496ceeef5210f23ffff65483049f026c", ["request.json", "response.png"], "2025-07-20")
-    fix_path("cache/raw/bands/59c370ae2ae320f2d3ff07ce77477c6a", ["request.json", "response.tiff"], "2025-07-20")
