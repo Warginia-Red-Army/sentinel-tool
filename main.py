@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS locations (
     latitude1 REAL NOT NULL,
     longitude1 REAL NOT NULL,
     latitude2 REAL NOT NULL,
-    longitude2 REAL NOT NULL,
+    longitude2 REAL NOT NULL
 )""")
 
 import bbox_helper
@@ -47,8 +47,31 @@ def download():
             bbox = BBox(bbox_helper.convertToCorrectBbox(bbox_helper.osielsko), crs=CRS.WGS84)
             download_map.download(time_interval, bbox)
 
+def tools(tool):
+    if tool is None or tool == "":
+        parser.print_help("Need type of tool")
+        return
+
+    print(f"using tool {tool}")
+
+def set_location():
+    pass
+
+def open_location():
+    pass
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Sentinel Hub Downloader")
-    parser.add_argument("-t", "--tool", required=False, help="Tools")
-    parser.add_argument("-d", "--d", required=False, help="To download maps")
+    tools = parser.add_subparsers(dest="tool")
+    convert = tools.add_parser("convert")
+    convert.add_argument("--input", required=True)
+    download = tools.add_parser("download")
+    download.add_argument("--url", required=True)
+
     args = parser.parse_args()
+    if args.tool == "convert":
+        print("converting: ", args.input)
+    else:
+        print("downloading: ", args.url)
+    # print(args.tool == "convert")
