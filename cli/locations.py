@@ -2,7 +2,6 @@ import sqlite3
 import webbrowser
 
 from database.locations import list_locations, add_location, remove_location, get_location
-from file_converting import converters
 
 
 def register_parser(tools):

@@ -11,7 +11,7 @@ from sentinelhub import (
 from dotenv import load_dotenv
 import os
 from datetime import date
-from utility import fix_output
+from tools import fix_output
 
 # from main import catalog
 
@@ -37,8 +37,8 @@ data_collection = DataCollection.SENTINEL2_L2A.define_from(
 
 catalog = SentinelHubCatalog(config=config)
 
-evalscript_10m = Path("scripts\\evaluates\\evalscript_10m.js")
-evalscript_20m = Path("scripts\\evaluates\\evalscript_20m.js")
+evalscript_10m = Path("../scripts/evaluates/evalscript_10m.js")
+evalscript_20m = Path("../scripts/evaluates/evalscript_20m.js")
 
 data_10m = {
     "eval": evalscript_10m,

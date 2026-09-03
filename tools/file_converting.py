@@ -5,7 +5,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-from data_converting import convert_true_color, convert_false_color, convert_ndvi, convert_swir_agriculture, \
+from tools.data_converting import convert_true_color, convert_false_color, convert_ndvi, convert_swir_agriculture, \
     convert_urban_geology, convert_nbr, convert_ndmi
 
 save_settings = {
@@ -76,7 +76,7 @@ def convert_images(folders, outs):
     if folders is not None:
         folders = [folders]
     if folders is None:
-        base = Path("data/raw")
+        base = Path("../data/raw")
         folders = [scene_folder for scene_folder in base.iterdir() if scene_folder.is_dir()]
 
     for f in folders:

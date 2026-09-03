@@ -8,7 +8,8 @@ from sentinelhub import (
 )
 
 import bbox_helper
-import download_map
+from tools import download_map
+
 
 def register_parser(tools):
     parser = tools.add_parser('download',
