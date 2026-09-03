@@ -1,3 +1,4 @@
+import sqlite3
 import webbrowser
 
 from database.locations import list_locations, add_location, remove_location, get_location
@@ -53,12 +54,20 @@ def register_parser(tools):
 
 
 def new_location(args):
-    name = input("Locaiton name: ")
-    lon1 = float(input("Longitude 1: "))
-    lat1 = float(input("Latitude 1: "))
-    lon2 = float(input("Longitude 2: "))
-    lat2 = float(input("Latitude 2: "))
-    add_location(name, lon1, lat1, lon2, lat2)
+    name = args.name
+    (lat1, lon1, lat2, lon2) = args.coordinates
+    if not name:
+        input("Locaiton name: ")
+    if not args.coordinates:
+        lon1 = float(input("Longitude 1: "))
+        lat1 = float(input("Latitude 1: "))
+        lon2 = float(input("Longitude 2: "))
+        lat2 = float(input("Latitude 2: "))
+    try:
+        add_location(name, lon1, lat1, lon2, lat2)
+        print("Location added")
+    except sqlite3.IntegrityError:
+        print(f"Location '{name}' already exists")
 
 def list_location(args):
     print("listing location")
@@ -86,14 +95,3 @@ def open_location(args):
 def location(args):
     print("do nothing")
     print(list_locations())
-
-# def run(args):
-#     print(args.converter)
-# for converter in args.converter:
-#     name, function = converters[converter]
-#     print(f"Running {name}")
-#
-#     function(
-#         overwrite=args.overwrite,
-#     )
-# pass
