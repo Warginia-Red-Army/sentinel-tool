@@ -1,8 +1,5 @@
-from shlex import shlex
-from time import sleep
-
+import shlex
 from main import create_parser
-from utility.progress import progress
 
 
 def register_parser(tools):
