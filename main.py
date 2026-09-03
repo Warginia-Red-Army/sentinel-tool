@@ -1,10 +1,9 @@
 import argparse
 
 from database.database import init_database
-from tools import locations, download, convert
+from tools import locations, download, convert, run
 
-
-def main():
+def create_parser():
     parser = argparse.ArgumentParser(
         description="Sentinel-2 Tools hub"
     )
@@ -18,7 +17,13 @@ def main():
     locations.register_parser(tools)
     download.register_parser(tools)
     convert.register_parser(tools)
+    run.register_parser(tools)
 
+    return parser
+
+
+def main():
+    parser = create_parser()
     args = parser.parse_args()
     args.func(args)
 
