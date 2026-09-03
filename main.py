@@ -1,7 +1,7 @@
 import argparse
 
 from database.database import init_database
-from tools import locations, download, convert, run
+from cli import locations, download, convert, run
 
 def create_parser():
     parser = argparse.ArgumentParser(

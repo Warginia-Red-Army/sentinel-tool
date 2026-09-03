@@ -6,14 +6,13 @@ from sentinelhub import (
     SentinelHubCatalog,
     DataCollection,
     MimeType,
-    CRS,
     BBox
 )
 from dotenv import load_dotenv
 import os
 from datetime import date
-import calendar
-import fix_output
+from utility import fix_output
+
 # from main import catalog
 
 load_dotenv(verbose=True)

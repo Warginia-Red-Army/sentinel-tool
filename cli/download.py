@@ -18,6 +18,25 @@ def register_parser(tools):
 
     parser.set_defaults(func=download)
 
+# downlaod logic
+# since year
+# until year
+# photos in month count
+# month/day/week/year interval
+
+def process_download():
+    pass
+
+def process_year():
+    pass
+
+def process_month():
+    pass
+
+def process_day():
+    pass
+
+
 
 def download():
     today = date.today()
