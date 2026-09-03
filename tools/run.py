@@ -1,4 +1,8 @@
+from shlex import shlex
+from time import sleep
+
 from main import create_parser
+from utility.progress import progress
 
 
 def register_parser(tools):
@@ -10,13 +14,13 @@ def run(args):
     while True:
         try:
             command = input("> ")
-            if command == "exit":
+            if command in ("exit", "quit"):
                 break
 
             if not command.strip():
                 continue
 
-            command_args = parser.parse_args(command.split())
+            command_args = parser.parse_args(shlex.split(command))
 
             if hasattr(command_args, "func"):
                 command_args.func(command_args)
