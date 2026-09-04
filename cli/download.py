@@ -7,7 +7,6 @@ from sentinelhub import (
     BBox
 )
 
-import bbox_helper
 from tools import download_map
 
 
